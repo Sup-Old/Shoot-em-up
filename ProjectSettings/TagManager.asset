@@ -16,12 +16,12 @@ TagManager:
   - EnemyTrigger
   - CampFire
   - Light
+  - LightArea
   - MeleeWeapon
   - RangeWeapon
   - Woods
   - Player
   - Enemy
-  - 
   - 
   - 
   - 
