@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1802285343351912723}
   - component: {fileID: 8941055460391810604}
   - component: {fileID: 5205504914663188886}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: HealthEdges
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 8567850297402184921}
   - component: {fileID: 6338009296903813818}
   - component: {fileID: 6614005465547893329}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: HealthBackGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,7 +168,7 @@ GameObject:
   - component: {fileID: -153846059510178860}
   - component: {fileID: 7745768117118388161}
   - component: {fileID: 6360327417850073746}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: Wolf
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -396,7 +396,7 @@ GameObject:
   - component: {fileID: 109081956093214313}
   - component: {fileID: 5961485285829557227}
   - component: {fileID: 4818196528665375293}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -514,7 +514,7 @@ GameObject:
   - component: {fileID: 3164654580242777998}
   - component: {fileID: 6255276590397241152}
   - component: {fileID: 5449473338453347213}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: AttackSentry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -596,7 +596,7 @@ GameObject:
   - component: {fileID: 5761071261686617048}
   - component: {fileID: 3046778318470663372}
   - component: {fileID: 2420676671639911266}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: Health
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -673,7 +673,7 @@ GameObject:
   - component: {fileID: 3745176044243372736}
   - component: {fileID: 2991057566399219131}
   - component: {fileID: 8449196288165935365}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}

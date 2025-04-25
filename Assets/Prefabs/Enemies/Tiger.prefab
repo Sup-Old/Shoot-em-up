@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4048399098106347589}
   - component: {fileID: 3658580754723825811}
   - component: {fileID: 3884425656475961437}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: Health
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 6567580339836215273}
   - component: {fileID: 1591326332402117388}
   - component: {fileID: 4795145628906779044}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: HealthBackGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ GameObject:
   - component: {fileID: 8626676933887934499}
   - component: {fileID: 7375732879150150528}
   - component: {fileID: 656735464664257775}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -357,7 +357,7 @@ GameObject:
   - component: {fileID: 7338742879989409630}
   - component: {fileID: 8463719048276802122}
   - component: {fileID: 1251711775487603864}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: HealthEdges
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -434,7 +434,7 @@ GameObject:
   - component: {fileID: 4215876487180742907}
   - component: {fileID: 702117856557139114}
   - component: {fileID: 1625072039100485711}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -559,7 +559,7 @@ GameObject:
   - component: {fileID: -668791115394311090}
   - component: {fileID: 3030395915031223729}
   - component: {fileID: 9124535533275933272}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: Tiger
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -785,7 +785,7 @@ GameObject:
   - component: {fileID: 5398701509825553121}
   - component: {fileID: 3833192926193042107}
   - component: {fileID: 3114974967506311829}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: AttackEntry
   m_TagString: Untagged
   m_Icon: {fileID: 0}

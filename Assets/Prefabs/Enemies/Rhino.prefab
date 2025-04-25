@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2695619011851813064}
   - component: {fileID: 7377602648841689044}
   - component: {fileID: 442404101849241925}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: AttackSentry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 8413030803245127873}
   - component: {fileID: 2895561155624643827}
   - component: {fileID: 7415141431834353045}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: HealthEdges
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -170,7 +170,7 @@ GameObject:
   - component: {fileID: 4728558001184224710}
   - component: {fileID: 8024895684118931343}
   - component: {fileID: 5760145426564141457}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -288,7 +288,7 @@ GameObject:
   - component: {fileID: 6713017246816754507}
   - component: {fileID: 5495072949745896347}
   - component: {fileID: 5090626233351261450}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: HealthBackGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -363,7 +363,7 @@ GameObject:
   - component: {fileID: 2853828139487113814}
   - component: {fileID: 7196279583038523426}
   - component: {fileID: 5381586705271001497}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: Health
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -440,7 +440,7 @@ GameObject:
   - component: {fileID: 5495703297457954843}
   - component: {fileID: 6869875771759343584}
   - component: {fileID: 939849588750635577}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -640,7 +640,7 @@ GameObject:
   - component: {fileID: 49937259414924640}
   - component: {fileID: 8845944399408189281}
   - component: {fileID: 4776061544443688301}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: Rhino
   m_TagString: Enemy
   m_Icon: {fileID: 0}
