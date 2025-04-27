@@ -15,26 +15,21 @@ public class PlayerFreezing : MonoBehaviour
     private void Start()
     {
         _zoneDetector = GetComponent<PlayerFreezingZoneDetector>();
-        _playerHealth = GetComponent<PlayerHealth>();
-
-        if (_zoneDetector == null)
-            Debug.LogError("Не найден PlayerFreezingZoneDetector!");
-
-        if (_playerHealth == null)
-            Debug.LogError("Не найден PlayerHealth!");
+        _playerHealth = GetComponentInChildren<PlayerHealth>();
 
         if (freezeOverlay != null)
             freezeOverlay.color = new Color(1, 1, 1, 0);
     }
+
     private void Update()
     {
         if (!_zoneDetector.IsInLightZone)
         {
             _timeOutside += Time.deltaTime;
 
-            float t = Mathf.Clamp01(_timeOutside / freezeDelay);
+            float t = Mathf.Clamp01(_timeOutside / (freezeDelay * 10f)); // УМЕНЬШИЛИ СКОРОСТЬ В 10 раз
             if (freezeOverlay != null)
-                freezeOverlay.color = new Color(1, 1, 1, t * 0.6f); // плавная прозрачность
+                freezeOverlay.color = new Color(1, 1, 1, t * 0.6f);
 
             if (_timeOutside >= freezeDelay)
             {
@@ -48,4 +43,5 @@ public class PlayerFreezing : MonoBehaviour
                 freezeOverlay.color = new Color(1, 1, 1, 0);
         }
     }
+
 }

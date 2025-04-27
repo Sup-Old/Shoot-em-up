@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 006d4856a638c594a9bfc2c7a138316d
+guid: 802ffdf78d61b1f4cb968893b14b293f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4932962460604070304
-    second: FreezyCanvas_0
+      213: -3343995148451755180
+    second: FreezyBACK_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: FreezyCanvas_0
+      name: FreezyBACK_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0668b5d27c89a8bb0800000000000000
-      internalID: -4932962460604070304
+      spriteID: 45b47e5312eb791d0800000000000000
+      internalID: -3343995148451755180
       vertices: []
       indices: 
       edges: []
@@ -147,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      FreezyCanvas_0: -4932962460604070304
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
