@@ -351,7 +351,7 @@ GameObject:
   - component: {fileID: 6878060799643118646}
   - component: {fileID: 368796462056630820}
   m_Layer: 11
-  m_Name: Player
+  m_Name: Player 1
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -443,8 +443,8 @@ MonoBehaviour:
   _input: {fileID: 6811252845162558520}
   _spriteRenderer: {fileID: 1487238869821612879}
   _sprites:
-  - {fileID: -347689628, guid: 1d139c8e3e64aa94eabefa1669ab140f, type: 3}
-  - {fileID: -731502682, guid: 1d139c8e3e64aa94eabefa1669ab140f, type: 3}
+  - {fileID: 3345508739736421500, guid: 067db1e797bb294498e655248e842b89, type: 3}
+  - {fileID: 1889441527787109331, guid: 067db1e797bb294498e655248e842b89, type: 3}
 --- !u!50 &5585516636606544180
 Rigidbody2D:
   serializedVersion: 5
@@ -607,7 +607,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: -347689628, guid: 1d139c8e3e64aa94eabefa1669ab140f, type: 3}
+  m_Sprite: {fileID: 3345508739736421500, guid: 067db1e797bb294498e655248e842b89, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

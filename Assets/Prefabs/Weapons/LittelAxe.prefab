@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 1609405800, guid: bcf15bfc097a3434c8576b74010a1222, type: 3}
+  m_Sprite: {fileID: -7519414488639033212, guid: 082a011f57e20cb4db9c6d2bdd27c054, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 8334598047959978876}
   - component: {fileID: 1695616464076098861}
   m_Layer: 9
-  m_Name: Stone
+  m_Name: LittelAxe
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
