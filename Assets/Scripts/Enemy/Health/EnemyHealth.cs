@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour, IHealth
 {
-
     [SerializeField] private EnemyConfig _config;
 
     public event Action OnDecrease;
@@ -24,15 +23,31 @@ public class EnemyHealth : MonoBehaviour, IHealth
 
     public void Decrease(float value)
     {
+        if (IsDead) return;
+
         Current -= value;
 
         if (Current <= _config.MinHealthPoints)
         {
-            Current = _config.MinHealthPoints;
-            IsDead = true;
+            Die();
         }
 
         OnDecrease?.Invoke();
+    }
+
+    private void Die()
+    {
+        IsDead = true;
+        Current = _config.MinHealthPoints;
+
+        
+        PlayerExperience playerExp = FindObjectOfType<PlayerExperience>();
+        if (playerExp != null)
+        {
+            playerExp.Increase(_config.ExperienceReward);
+        }
+
+        Destroy(gameObject);
     }
 
     public void Increase(float value)

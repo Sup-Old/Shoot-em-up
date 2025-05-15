@@ -13,5 +13,7 @@ public class EnemyConfig : ScriptableObject
 
     [field: SerializeField] public float Damage { get; private set; } = 0;
 
+    [SerializeField] private int _experienceReward = 10;
+    public int ExperienceReward => _experienceReward;
     [field: SerializeField] public float AttackCoolDown { get; private set; } = 2f;
 }
