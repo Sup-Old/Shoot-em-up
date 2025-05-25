@@ -28,6 +28,12 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void ChangeSprite()
+    {
+        // Меняем спрайт на новый
+    }
+
+
     private void Update()
     {
         if (_input == null || _stateMachine == null) return;

@@ -7,6 +7,10 @@ public class WeaponSentry : MonoBehaviour
     [SerializeField] private PlayerInput _input;
     [SerializeField] private WeaponStateMachine _weaponStateMachine;
     [SerializeField] private PlayerStateMachine _playerStateMachine;
+
+    [SerializeField] private Transform _meleeWeaponHolder;
+    [SerializeField] private Transform _rangeWeaponHolder;
+
     private List<IWeapon> _weapons = new();
 
     private void Awake()
@@ -52,4 +56,21 @@ public class WeaponSentry : MonoBehaviour
             }
         }
     }
+
+    public void ChangeWeapon(GameObject newWeapon, bool isMelee)
+    {
+        foreach (var weapon in _weapons)
+        {
+            (weapon as MonoBehaviour)?.gameObject.SetActive(false);
+        }
+
+        Transform spawnPoint = isMelee ? _meleeWeaponHolder : _rangeWeaponHolder;
+
+        var spawnedWeapon = Instantiate(newWeapon, spawnPoint.position, Quaternion.identity);
+        spawnedWeapon.transform.parent = spawnPoint;
+
+        _weapons.Add(spawnedWeapon.GetComponent<IWeapon>());
+    }
+
+
 }

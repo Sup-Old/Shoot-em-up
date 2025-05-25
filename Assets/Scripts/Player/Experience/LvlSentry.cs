@@ -1,13 +1,16 @@
+using System.Collections;
 using UnityEngine;
 
 public class LvlCentry : MonoBehaviour
-{
+{   
     [SerializeField] private PlayerExperience _playerExperience;
     [SerializeField] private int _lastExp;
+    [SerializeField] private UpgradeManager _upgradeManager;
 
     private void OnEnable()
     {
         _playerExperience.OnIncrease += LvlCheck;
+        StartCoroutine(LevelUpTimer());
     }
 
     private void OnDisable()
@@ -22,5 +25,11 @@ public class LvlCentry : MonoBehaviour
             _lastExp = _playerExperience.Current;
             //...
         }
+    }
+
+    private IEnumerator LevelUpTimer()
+    {
+        yield return new WaitForSeconds(50);
+        _upgradeManager.ShowUpgradeWindow();
     }
 }

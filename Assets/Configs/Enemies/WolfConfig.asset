@@ -18,3 +18,4 @@ MonoBehaviour:
   <MoveSpeed>k__BackingField: 4
   <Damage>k__BackingField: 1
   <AttackCoolDown>k__BackingField: 2
+  <ExpReward>k__BackingField: 50

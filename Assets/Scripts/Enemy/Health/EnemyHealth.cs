@@ -3,18 +3,19 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour, IHealth
 {
-
     [SerializeField] private EnemyConfig _config;
 
     public event Action OnDecrease;
 
     public bool IsDead { get; private set; }
     public float Current { get; private set; }
+    public int ExpReward { get; private set; }
 
     private void OnEnable()
     {
         IsDead = false;
         Current = _config.MaxHealthPoints;
+        ExpReward = _config.ExpReward;
     }
 
     private void OnDisable()
@@ -30,12 +31,27 @@ public class EnemyHealth : MonoBehaviour, IHealth
         {
             Current = _config.MinHealthPoints;
             IsDead = true;
+            GiveExperience();
+            Destroy(gameObject);
         }
 
         OnDecrease?.Invoke();
     }
 
-    public void Increase(float value)
+    private void GiveExperience()
+    {
+        var playerExp = FindObjectOfType<PlayerExperience>();
+        if (playerExp != null)
+        {
+            playerExp.Increase(ExpReward);
+        }
+        else
+        {
+            Debug.LogWarning("Не найден PlayerExperience в сцене!");
+        }
+    }
+
+public void Increase(float value)
     {
         Current += value;
 
