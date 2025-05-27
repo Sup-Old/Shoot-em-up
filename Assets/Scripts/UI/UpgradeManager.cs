@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
-
+using System.Collections;
 
 public class UpgradeManager : MonoBehaviour
 {
@@ -14,14 +14,16 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField] private List<SpriteArrayWrapper> _playerSkins;
 
     [SerializeField] private GameObject _upgradeWindow;
+    [SerializeField] private DayNightManager _dayNightManager;
+
     [SerializeField] private List<UIUpgradeSlot> _upgradeSlots;
     [SerializeField] private Player _player;
     [SerializeField] private WeaponSentry _weaponSentry;
 
     public void ShowUpgradeWindow()
     {
-        _upgradeWindow.SetActive(true);
-        SpawnUpgradeOptions();
+        _dayNightManager.ShowWindow();
+        StartCoroutine(Show());
     }
 
     private void SpawnUpgradeOptions()
@@ -135,6 +137,14 @@ public class UpgradeManager : MonoBehaviour
             _meleeWeaponConfig.RemoveAt(0);
         }
         CloseUpgradeWindow();
+    }
+
+    private IEnumerator Show()
+    {
+        yield return new WaitForSeconds(5);
+        _dayNightManager.CloseWindow();
+        _upgradeWindow.SetActive(true);
+        SpawnUpgradeOptions();
     }
 }
 
