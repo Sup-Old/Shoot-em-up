@@ -8,7 +8,12 @@ public class DummyState : MonoBehaviour,IWeaponState, IWeapon
     [SerializeField] private Timer _timer;
     private bool _isAttacked;
 
-    public MeleeWeaponConfig Config { get { return _config; } }
+    public MeleeWeaponConfig Config
+    {
+        get { return _config; }
+        set { _config = value; }
+    }
+
 
     private void Awake()
     {

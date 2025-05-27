@@ -65,4 +65,10 @@ public class ObjectPool<T> where T : MonoBehaviour
         }
         throw new Exception($"You have no free objects in {typeof(T)} pool");
     }
+
+    public List<T> GetAllElements()
+    {
+        return _objectPool;
+    }
+
 }

@@ -9,7 +9,7 @@ public class PlayerFlip : MonoBehaviour
     [SerializeField] private bool _lookDown;
     [SerializeField] private PlayerInput _input;
     [SerializeField] private SpriteRenderer _spriteRenderer;
-    [SerializeField] private List<Sprite> _sprites;
+    [SerializeField] public List<Sprite> _sprites;
 
     private void Update()
     {

@@ -12,6 +12,11 @@ public class BulletPool : MonoBehaviour
 
     private void Start()
     {
+        InitializePool();
+    }
+
+    private void InitializePool()
+    {
         _bullets = new ObjectPool<Bullet>(_prefab, _isAutoExpand, _spawnPoint, _poolSize);
     }
 
@@ -23,5 +28,18 @@ public class BulletPool : MonoBehaviour
             return null;
         }
         return bulletRigidBody;
+    }
+
+    public void UpdateBulletPrefab(Bullet newPrefab)
+    {
+        foreach (var b in _bullets.GetAllElements())
+        {
+            if (b != null)
+                Destroy(b.gameObject);
+        }
+
+        _prefab = newPrefab;
+
+        InitializePool();
     }
 }

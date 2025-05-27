@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class WeaponSentry : MonoBehaviour
@@ -57,20 +58,37 @@ public class WeaponSentry : MonoBehaviour
         }
     }
 
-    public void ChangeWeapon(GameObject newWeapon, bool isMelee)
+    public void ChangeWeapon(GameObject newWeapon, MeleeWeaponConfig config)
     {
-        foreach (var weapon in _weapons)
-        {
-            (weapon as MonoBehaviour)?.gameObject.SetActive(false);
-        }
-
-        Transform spawnPoint = isMelee ? _meleeWeaponHolder : _rangeWeaponHolder;
+        Transform spawnPoint = _meleeWeaponHolder;
 
         var spawnedWeapon = Instantiate(newWeapon, spawnPoint.position, Quaternion.identity);
-        spawnedWeapon.transform.parent = spawnPoint;
-
+        spawnedWeapon.transform.parent = spawnPoint.parent;
+        Destroy(spawnPoint.gameObject);
+        _meleeWeaponHolder = spawnedWeapon.transform;
+        gameObject.GetComponent<DummyState>().Config = config;
         _weapons.Add(spawnedWeapon.GetComponent<IWeapon>());
     }
 
+    public void ChangeWeapon(GameObject newWeapon, RangeWeaponConfig config)
+    {
+        Transform spawnPoint = _rangeWeaponHolder;
+
+       /* var spawnedWeapon = Instantiate(newWeapon, spawnPoint.position, Quaternion.identity);
+        spawnedWeapon.transform.parent = spawnPoint.parent;
+        Destroy(spawnPoint.gameObject);
+        _rangeWeaponHolder = spawnedWeapon.transform;*/
+
+        spawnPoint.GetComponent<SpriteRenderer>().sprite = newWeapon.GetComponentInChildren<SpriteRenderer>().sprite;
+
+        StoneState stoneState = gameObject.GetComponent<StoneState>();
+        stoneState._config = config;
+        //_weapons.Add(spawnedWeapon.GetComponent<IWeapon>());
+
+        if (stoneState != null && stoneState._bulletPool != null)
+        {
+            stoneState._bulletPool.UpdateBulletPrefab(newWeapon.GetComponent<Bullet>());
+        }
+    }
 
 }

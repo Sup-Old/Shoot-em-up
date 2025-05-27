@@ -4,19 +4,18 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private PlayerExperience _playerExperience;
     [SerializeField] private PlayerHealth _health;
-    [SerializeField] private int _enemyLayerID = 6; // Пример: слой "Enemy"
+    [SerializeField] private int _enemyLayerID = 6;
     [SerializeField] private PlayerInput _input;
     [SerializeField] private PlayerStateMachine _stateMachine;
+    [SerializeField] private PlayerFlip _playerFlip;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Проверяем все возможные null-ссылки
         if (collision == null || _health == null) return;
 
-        // Проверка слоя (оптимизированная)
         if (collision.gameObject.layer == _enemyLayerID)
         {
-            // Безопасное получение Enemy
+ 
             if (collision.TryGetComponent(out Enemy enemy) && enemy.Config != null)
             {
                 _health.Decrease(enemy.Config.Damage);
@@ -28,9 +27,11 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void ChangeSprite()
+    public void ChangeSprite(Sprite playerSkin0, Sprite playerSkin1)
     {
-        // Меняем спрайт на новый
+        _playerFlip._sprites[0] = playerSkin0;
+        _playerFlip._sprites[1] = playerSkin1;
+        _stateMachine.gameObject.GetComponent<SpriteRenderer>().sprite = playerSkin0;
     }
 
 
@@ -38,7 +39,6 @@ public class Player : MonoBehaviour
     {
         if (_input == null || _stateMachine == null) return;
 
-        // Оптимизированная проверка движения
         _stateMachine.SetState(_input.MoveDir != Vector2.zero
             ? _stateMachine.GetState<PlayerWalkState>()
             : _stateMachine.GetState<PlayerIdleState>());
@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
 #if UNITY_EDITOR
     private void OnValidate()
     {
-        // Автозаполнение слоя врагов в редакторе
+
         if (_enemyLayerID == 0 && LayerMask.NameToLayer("Enemy") != -1)
         {
             _enemyLayerID = LayerMask.NameToLayer("Enemy");

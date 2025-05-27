@@ -1,15 +1,22 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Events;
+
 
 public class UpgradeManager : MonoBehaviour
 {
     [SerializeField] private List<GameObject> _rangeWeaponPrefabs;
+    [SerializeField] private List<RangeWeaponConfig> _rangeWeaponConfig;
     [SerializeField] private List<GameObject> _meleeWeaponPrefabs;
-    [SerializeField] private List<Sprite> _playerSkins;
+    [SerializeField] private List<MeleeWeaponConfig> _meleeWeaponConfig;
+
+    [SerializeField] private List<SpriteArrayWrapper> _playerSkins;
 
     [SerializeField] private GameObject _upgradeWindow;
     [SerializeField] private List<UIUpgradeSlot> _upgradeSlots;
     [SerializeField] private Player _player;
+    [SerializeField] private WeaponSentry _weaponSentry;
 
     public void ShowUpgradeWindow()
     {
@@ -19,6 +26,7 @@ public class UpgradeManager : MonoBehaviour
 
     private void SpawnUpgradeOptions()
     {
+        // Очистка старых дочерних элементов в SpawnPoint (если они были)
         foreach (var slot in _upgradeSlots)
         {
             foreach (Transform child in slot.SpawnPoint)
@@ -27,35 +35,73 @@ public class UpgradeManager : MonoBehaviour
             }
         }
 
-        SpawnItem(_rangeWeaponPrefabs, _upgradeSlots[0]);
-        SpawnItem(_meleeWeaponPrefabs, _upgradeSlots[1]);
-        SpawnSkin(_playerSkins, _upgradeSlots[2]);
+        SpawnItem(_rangeWeaponPrefabs, _upgradeSlots[0], UpgradeRangeWeapon);
+        SpawnItem(_meleeWeaponPrefabs, _upgradeSlots[1], UpgradeMeleeWeapon);
+        SpawnSkin(_playerSkins, _upgradeSlots[2], ChangePlayerSprite);
     }
 
-    private void SpawnItem(List<GameObject> itemList, UIUpgradeSlot slot)
+    private void SpawnItem(List<GameObject> itemList, UIUpgradeSlot slot, UnityAction clickAction)
     {
         if (itemList.Count == 0) return;
 
-        var prefab = itemList[0];
-        Instantiate(prefab, slot.SpawnPoint);
+        var weaponPrefab = itemList[0];
+        // Получаем спрайт из SpriteRenderer префаба
+        Sprite weaponSprite = weaponPrefab.GetComponentInChildren<SpriteRenderer>().sprite;
+
+        if (weaponSprite == null)
+        {
+            Debug.LogError("В префабе отсутствует спрайт в компоненте SpriteRenderer.");
+            return;
+        }
+
+        // Используем заранее назначенную кнопку
+        Button btn = slot.button;
+        if (btn == null)
+        {
+            Debug.LogError("В UIUpgradeSlot не назначена кнопка (button).");
+            return;
+        }
+
+        Image img = slot.SpawnPoint.GetComponent<Image>();
+        if (img == null)
+        {
+            Debug.LogError("В кнопке отсутствует компонент Image.");
+            return;
+        }
+        img.sprite = weaponSprite;
+
+        btn.onClick.RemoveAllListeners();
+        btn.onClick.AddListener(clickAction);
     }
 
-    private void SpawnSkin(List<Sprite> skinList, UIUpgradeSlot slot)
+    private void SpawnSkin(List<SpriteArrayWrapper> skinList, UIUpgradeSlot slot, UnityAction clickAction)
     {
         if (skinList.Count == 0) return;
 
-        var spriteRenderer = slot.SpawnPoint.GetComponent<SpriteRenderer>();
-        if (spriteRenderer != null)
+        Button btn = slot.button;
+        if (btn == null)
         {
-            spriteRenderer.sprite = skinList[0];
+            Debug.LogError("В UIUpgradeSlot не назначена кнопка (button).");
+            return;
         }
+
+        Image img = slot.SpawnPoint.GetComponent<Image>();
+        if (img == null)
+        {
+            Debug.LogError("В кнопке отсутствует компонент Image.");
+            return;
+        }
+        img.sprite = skinList[0].sprites[0];
+
+        btn.onClick.RemoveAllListeners();
+        btn.onClick.AddListener(clickAction);
     }
 
     public void ChangePlayerSprite()
     {
         if (_playerSkins.Count > 0)
         {
-            _player.ChangeSprite();
+            _player.ChangeSprite(_playerSkins[0].sprites[0], _playerSkins[0].sprites[1]);
             _playerSkins.RemoveAt(0);
         }
         CloseUpgradeWindow();
@@ -71,8 +117,10 @@ public class UpgradeManager : MonoBehaviour
         if (_rangeWeaponPrefabs.Count > 0)
         {
             var newWeapon = _rangeWeaponPrefabs[0];
-            _player.GetComponent<WeaponSentry>().ChangeWeapon(newWeapon, false);
+            
+            _weaponSentry.ChangeWeapon(newWeapon, _rangeWeaponConfig[0]);
             _rangeWeaponPrefabs.RemoveAt(0);
+            _rangeWeaponConfig.RemoveAt(0);
         }
         CloseUpgradeWindow();
     }
@@ -82,11 +130,16 @@ public class UpgradeManager : MonoBehaviour
         if (_meleeWeaponPrefabs.Count > 0)
         {
             var newWeapon = _meleeWeaponPrefabs[0];
-            _player.GetComponent<WeaponSentry>().ChangeWeapon(newWeapon, true);
+            _weaponSentry.ChangeWeapon(newWeapon, _meleeWeaponConfig[0]);
             _meleeWeaponPrefabs.RemoveAt(0);
+            _meleeWeaponConfig.RemoveAt(0);
         }
         CloseUpgradeWindow();
     }
+}
 
-
+[System.Serializable]
+public class SpriteArrayWrapper
+{
+    public List<Sprite> sprites;
 }

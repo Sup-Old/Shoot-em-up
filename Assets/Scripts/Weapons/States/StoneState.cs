@@ -4,8 +4,8 @@ public class StoneState :MonoBehaviour, IWeaponState, IWeapon
 {
     [SerializeField] private GameObject _currentWeapon;
     [SerializeField] private Timer _timer;
-    [SerializeField] private RangeWeaponConfig _config;
-    [SerializeField] private BulletPool _bulletPool;
+    [SerializeField] public RangeWeaponConfig _config;
+    [SerializeField] public BulletPool _bulletPool;
     [SerializeField] private PlayerInput _input;
     private Rigidbody2D _currentFreeBullet;
     private bool _isAttacked;
