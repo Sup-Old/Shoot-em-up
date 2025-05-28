@@ -43,6 +43,7 @@ public class EnemyHealth : MonoBehaviour, IHealth
         var playerExp = FindObjectOfType<PlayerExperience>();
         if (playerExp != null)
         {
+            Debug.Log("Give experience= " + ExpReward);
             playerExp.Increase(ExpReward);
         }
         else

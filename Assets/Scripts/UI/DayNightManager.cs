@@ -1,10 +1,12 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class DayNightManager : MonoBehaviour
 {
     [SerializeField] private GameObject _window;
     [SerializeField] private GameObject _circle;
+    [SerializeField] private GameObject _campFire;
 
 
     [SerializeField] private float rotationDuration = 2f;
@@ -15,7 +17,18 @@ public class DayNightManager : MonoBehaviour
     {
         _window.SetActive(true);
         RotateObject();
+        setLight();
     }
+
+    private void setLight()
+    {
+        _campFire.GetComponent<CampFire>().enabled = false;
+        _campFire.GetComponent<CampFireHealth>().enabled = false;
+        _campFire.GetComponentInChildren<Light2D>().shadowsEnabled = false;
+        _campFire.GetComponent<CampFireLightSystem>().enabled = false;
+        _campFire.GetComponentInChildren<Light2D>().transform.localScale = Vector3.one * 50;
+    }
+
 
     public void CloseWindow()
     {

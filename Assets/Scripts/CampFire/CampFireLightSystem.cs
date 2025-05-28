@@ -53,4 +53,6 @@ public class CampFireLightSystem : MonoBehaviour
         if (_fireHealth != null)
             _fireHealth.OnHealthChanged -= UpdateLight;
     }
+
+
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerExperience : MonoBehaviour, IExperience
 {
     public event Action OnIncrease;
+    public event Action<float> OnDecrease;
 
     public int Current { get; private set; }
 
@@ -16,5 +17,11 @@ public class PlayerExperience : MonoBehaviour, IExperience
     {
         Current += value;
         OnIncrease?.Invoke();
+    }
+
+    public void Decrease(int value)
+    {
+        Current -= value;
+        OnDecrease?.Invoke(0);
     }
 }

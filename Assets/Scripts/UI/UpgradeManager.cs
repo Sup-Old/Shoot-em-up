@@ -20,15 +20,42 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField] private Player _player;
     [SerializeField] private WeaponSentry _weaponSentry;
 
+    [SerializeField] private ExperienceUI _experienceUI;
+
     public void ShowUpgradeWindow()
     {
-        _dayNightManager.ShowWindow();
-        StartCoroutine(Show());
+        if (_experienceUI.getExpBarsCount() >= 0)
+        {
+            _dayNightManager.ShowWindow();
+            StartCoroutine(Show());
+        }
+    }
+
+    private IEnumerator Show()
+    {
+        yield return new WaitForSeconds(5);
+        _dayNightManager.CloseWindow();
+        if (_experienceUI.getExpBarsCount() > 0)
+        {
+            _upgradeWindow.SetActive(true);
+            SpawnUpgradeOptions();
+        }
+    }
+
+    private void CloseUpgradeWindow()
+    {
+        _upgradeWindow.SetActive(false);
+
+        _experienceUI.DecreaseCount(1);
+        if (_experienceUI.getExpBarsCount() > 0)
+        {
+            _upgradeWindow.SetActive(true);
+            SpawnUpgradeOptions();
+        }
     }
 
     private void SpawnUpgradeOptions()
     {
-        // Очистка старых дочерних элементов в SpawnPoint (если они были)
         foreach (var slot in _upgradeSlots)
         {
             foreach (Transform child in slot.SpawnPoint)
@@ -47,7 +74,6 @@ public class UpgradeManager : MonoBehaviour
         if (itemList.Count == 0) return;
 
         var weaponPrefab = itemList[0];
-        // Получаем спрайт из SpriteRenderer префаба
         Sprite weaponSprite = weaponPrefab.GetComponentInChildren<SpriteRenderer>().sprite;
 
         if (weaponSprite == null)
@@ -56,7 +82,6 @@ public class UpgradeManager : MonoBehaviour
             return;
         }
 
-        // Используем заранее назначенную кнопку
         Button btn = slot.button;
         if (btn == null)
         {
@@ -109,10 +134,6 @@ public class UpgradeManager : MonoBehaviour
         CloseUpgradeWindow();
     }
 
-    private void CloseUpgradeWindow()
-    {
-        _upgradeWindow.SetActive(false);
-    }
 
     public void UpgradeRangeWeapon()
     {
@@ -137,14 +158,6 @@ public class UpgradeManager : MonoBehaviour
             _meleeWeaponConfig.RemoveAt(0);
         }
         CloseUpgradeWindow();
-    }
-
-    private IEnumerator Show()
-    {
-        yield return new WaitForSeconds(5);
-        _dayNightManager.CloseWindow();
-        _upgradeWindow.SetActive(true);
-        SpawnUpgradeOptions();
     }
 }
 
