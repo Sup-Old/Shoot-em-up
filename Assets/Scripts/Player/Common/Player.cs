@@ -3,7 +3,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] private PlayerExperience _playerExperience;
-    [SerializeField] private PlayerHealth _health;
+    [SerializeField] public PlayerHealth _health;
     [SerializeField] private int _enemyLayerID = 6;
     [SerializeField] private PlayerInput _input;
     [SerializeField] private PlayerStateMachine _stateMachine;
@@ -33,6 +33,8 @@ public class Player : MonoBehaviour
         _playerFlip._sprites[1] = playerSkin1;
         _stateMachine.gameObject.GetComponent<SpriteRenderer>().sprite = playerSkin0;
     }
+
+    public PlayerExperience getPlayerExperience() { return _playerExperience; }
 
 
     private void Update()

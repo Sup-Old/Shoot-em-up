@@ -7,6 +7,15 @@ TagManager:
   - Enemy
   - Bullet
   - LightZone
+  - Camera
+  - UpgradeManager
+  - Experience
+  - DayNightManager
+  - Upgrade
+  - Slot
+  - Freezy
+  - Canvas
+  - CampFire
   layers:
   - Default
   - TransparentFX

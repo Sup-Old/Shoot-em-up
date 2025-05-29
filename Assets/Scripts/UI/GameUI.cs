@@ -35,10 +35,12 @@ public class GameUI : MonoBehaviour
 
     private void Restart()
     {
+        PlayerManager.Instance.ResetGame();
         SceneManager.LoadScene("Game");
     }
     private void Quit()
     {
+        PlayerManager.Instance.ResetGame();
         SceneManager.LoadScene("Menu");
     }
 }

@@ -7,6 +7,7 @@ public class DayNightManager : MonoBehaviour
     [SerializeField] private GameObject _window;
     [SerializeField] private GameObject _circle;
     [SerializeField] private GameObject _campFire;
+    [SerializeField] private GameObject _text;
 
 
     [SerializeField] private float rotationDuration = 2f;
@@ -61,5 +62,7 @@ public class DayNightManager : MonoBehaviour
         isRotating = false;
     }
 
+    public void SetCampFire(GameObject CampFire) { _campFire = CampFire; }
 
+    public void setText(bool b) { _text.SetActive(b); }
 }

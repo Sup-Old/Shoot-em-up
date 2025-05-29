@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class UpgradeManager : MonoBehaviour
 {
@@ -33,7 +34,7 @@ public class UpgradeManager : MonoBehaviour
 
     private IEnumerator Show()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(4);
         _dayNightManager.CloseWindow();
         if (_experienceUI.getExpBarsCount() > 0)
         {
@@ -42,7 +43,7 @@ public class UpgradeManager : MonoBehaviour
         }
     }
 
-    private void CloseUpgradeWindow()
+    private IEnumerator CloseUpgradeWindow()
     {
         _upgradeWindow.SetActive(false);
 
@@ -51,6 +52,15 @@ public class UpgradeManager : MonoBehaviour
         {
             _upgradeWindow.SetActive(true);
             SpawnUpgradeOptions();
+        }
+        else
+        {
+            _dayNightManager.setText(false);
+            _dayNightManager.ShowWindow();
+            yield return new WaitForSeconds(4);
+            _dayNightManager.setText(true);
+            _dayNightManager.CloseWindow();
+            SceneManager.LoadScene("Game1");
         }
     }
 
@@ -131,7 +141,7 @@ public class UpgradeManager : MonoBehaviour
             _player.ChangeSprite(_playerSkins[0].sprites[0], _playerSkins[0].sprites[1]);
             _playerSkins.RemoveAt(0);
         }
-        CloseUpgradeWindow();
+        StartCoroutine(CloseUpgradeWindow());
     }
 
 
@@ -140,12 +150,12 @@ public class UpgradeManager : MonoBehaviour
         if (_rangeWeaponPrefabs.Count > 0)
         {
             var newWeapon = _rangeWeaponPrefabs[0];
-            
+
             _weaponSentry.ChangeWeapon(newWeapon, _rangeWeaponConfig[0]);
             _rangeWeaponPrefabs.RemoveAt(0);
             _rangeWeaponConfig.RemoveAt(0);
         }
-        CloseUpgradeWindow();
+        StartCoroutine(CloseUpgradeWindow());
     }
 
     public void UpgradeMeleeWeapon()
@@ -157,10 +167,15 @@ public class UpgradeManager : MonoBehaviour
             _meleeWeaponPrefabs.RemoveAt(0);
             _meleeWeaponConfig.RemoveAt(0);
         }
-        CloseUpgradeWindow();
+        StartCoroutine(CloseUpgradeWindow());
     }
-}
 
+    public void SetUpgradeWindow(GameObject window) { _upgradeWindow = window; }
+    public void SetDayNightManager(DayNightManager day) { _dayNightManager = day; }
+    public void SetUpgradeSlots(List<UIUpgradeSlot> upgradeSlots) { _upgradeSlots = upgradeSlots; }
+   
+    public void SetExperienceUI(ExperienceUI experienceUI) { _experienceUI = experienceUI; }
+}
 [System.Serializable]
 public class SpriteArrayWrapper
 {

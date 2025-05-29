@@ -29,7 +29,7 @@ public class LvlCentry : MonoBehaviour
 
     private IEnumerator LevelUpTimer()
     {
-        yield return new WaitForSeconds(50);
+        yield return new WaitForSeconds(180);
         _upgradeManager.ShowUpgradeWindow();
     }
 }

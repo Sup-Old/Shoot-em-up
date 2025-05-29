@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class ExperienceUI : MonoBehaviour
 {
     [SerializeField] private Slider _expSlider;
-    [SerializeField] private PlayerExperience _playerExperience;
+    [SerializeField] public PlayerExperience _playerExperience;
     [SerializeField] private int _maxExp = 100;
 
     private int _fullExpBars = 0;

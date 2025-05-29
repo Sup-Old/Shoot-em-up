@@ -44,4 +44,6 @@ public class PlayerFreezing : MonoBehaviour
         }
     }
 
+    public void SetFreezyOverlay(Image image) { freezeOverlay = image; }
+
 }
