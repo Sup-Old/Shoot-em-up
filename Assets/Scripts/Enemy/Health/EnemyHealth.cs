@@ -6,6 +6,8 @@ public class EnemyHealth : MonoBehaviour, IHealth
     [SerializeField] private EnemyConfig _config;
 
     public event Action OnDecrease;
+    public event Action OnDeath;
+    public event Action<float> OnHealthChanged; //  добавлено
 
     public bool IsDead { get; private set; }
     public float Current { get; private set; }
@@ -16,6 +18,9 @@ public class EnemyHealth : MonoBehaviour, IHealth
         IsDead = false;
         Current = _config.MaxHealthPoints;
         ExpReward = _config.ExpReward;
+
+        //  уведомляем интерфейс
+        OnHealthChanged?.Invoke(GetHealthPercent());
     }
 
     private void OnDisable()
@@ -27,15 +32,33 @@ public class EnemyHealth : MonoBehaviour, IHealth
     {
         Current -= value;
 
-        if (Current <= _config.MinHealthPoints)
+        if (Current <= _config.MinHealthPoints && !IsDead)
         {
             Current = _config.MinHealthPoints;
             IsDead = true;
+
             GiveExperience();
-            Destroy(gameObject);
+            OnDeath?.Invoke();
+
+            gameObject.SetActive(false);
         }
 
         OnDecrease?.Invoke();
+        OnHealthChanged?.Invoke(GetHealthPercent()); //  обновляем UI
+    }
+
+    public void Increase(float value)
+    {
+        Current += value;
+        if (Current >= _config.MaxHealthPoints)
+            Current = _config.MaxHealthPoints;
+
+        OnHealthChanged?.Invoke(GetHealthPercent()); //  обновляем UI
+    }
+
+    public float GetHealthPercent()
+    {
+        return Mathf.InverseLerp(_config.MinHealthPoints, _config.MaxHealthPoints, Current);
     }
 
     private void GiveExperience()
@@ -43,22 +66,7 @@ public class EnemyHealth : MonoBehaviour, IHealth
         var playerExp = FindObjectOfType<PlayerExperience>();
         if (playerExp != null)
         {
-            Debug.Log("Give experience= " + ExpReward);
             playerExp.Increase(ExpReward);
-        }
-        else
-        {
-            Debug.LogWarning("Не найден PlayerExperience в сцене!");
-        }
-    }
-
-public void Increase(float value)
-    {
-        Current += value;
-
-        if (Current >= _config.MaxHealthPoints)
-        {
-            Current = _config.MaxHealthPoints;
         }
     }
 }

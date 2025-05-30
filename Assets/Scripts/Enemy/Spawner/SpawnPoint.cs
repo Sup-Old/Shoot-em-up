@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnPoint : MonoBehaviour
@@ -7,7 +5,7 @@ public class SpawnPoint : MonoBehaviour
     [SerializeField] private Timer _timer;
     [SerializeField] private EnemyPool _enemies;
     [SerializeField] private EnemyConfig _config;
-    private GameObject _currentEnemy;
+    private Enemy _currentEnemy;
 
     private void OnEnable()
     {
@@ -18,24 +16,36 @@ public class SpawnPoint : MonoBehaviour
     private void OnDisable()
     {
         _timer.OnTimeEnd -= SpawnEnemy;
-    }
-
-    private void Update()
-    {
-        if (_currentEnemy == null || !_currentEnemy.TryGetComponent<EnemyHealth>(out var enemyHealth))
+        if (_currentEnemy != null && _currentEnemy.Config != null)
         {
-            return;
-        }
-        if (enemyHealth.IsDead)
-        {
-            _currentEnemy.transform.position = transform.position;
-            _currentEnemy.SetActive(false);
-            _timer.SetTimer(_config.SpawnTime);
+            var health = _currentEnemy.GetComponent<EnemyHealth>();
+            if (health != null)
+                health.OnDeath -= OnEnemyDeath;
         }
     }
 
     private void SpawnEnemy()
     {
-        _currentEnemy = _enemies.CreateEnemie();
+        _currentEnemy = _enemies.CreateEnemy(); // получаем Enemy, а не GameObject
+        _currentEnemy.transform.position = transform.position;
+        _currentEnemy.gameObject.SetActive(true);
+
+        // подписка на смерть
+        var health = _currentEnemy.GetComponent<EnemyHealth>();
+        if (health != null)
+        {
+            health.OnDeath -= OnEnemyDeath; // на всякий случай удалим дубли
+            health.OnDeath += OnEnemyDeath;
+        }
+    }
+
+    private void OnEnemyDeath()
+    {
+        // отключаем врага после смерти, запускаем таймер
+        if (_currentEnemy != null)
+        {
+            _currentEnemy.gameObject.SetActive(false);
+            _timer.SetTimer(_config.SpawnTime);
+        }
     }
 }

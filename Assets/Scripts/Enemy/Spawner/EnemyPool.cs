@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyPool : MonoBehaviour
@@ -9,15 +7,15 @@ public class EnemyPool : MonoBehaviour
     [SerializeField] private Enemy _prefab;
     private ObjectPool<Enemy> _enemies;
 
-    public int PoolSise { get { return _poolSise; } }
+    public int PoolSise => _poolSise;
 
     private void Start()
     {
         _enemies = new ObjectPool<Enemy>(_prefab, _isAutoExpand, transform, _poolSise);
     }
 
-    public GameObject CreateEnemie()
+    public Enemy CreateEnemy()
     {
-        return _enemies.GetFreeElement().gameObject;
+        return _enemies.GetFreeElement();
     }
 }

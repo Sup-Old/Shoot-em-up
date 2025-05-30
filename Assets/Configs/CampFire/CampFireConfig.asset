@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <MaxHP>k__BackingField: 100
   <MinHP>k__BackingField: 0
-  <DecreaseHPValue>k__BackingField: 0.01
+  <DecreaseHPValue>k__BackingField: 0.005
   <IncreaseHPValue>k__BackingField: 10
