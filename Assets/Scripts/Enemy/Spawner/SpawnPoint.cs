@@ -26,14 +26,16 @@ public class SpawnPoint : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        _currentEnemy = _enemies.CreateEnemy(); // получаем Enemy, а не GameObject
+        _currentEnemy = _enemies.CreateEnemy();
         _currentEnemy.transform.position = transform.position;
         _currentEnemy.gameObject.SetActive(true);
 
         // подписка на смерть
         var health = _currentEnemy.GetComponent<EnemyHealth>();
+        health.ToFull();
         if (health != null)
         {
+            
             health.OnDeath -= OnEnemyDeath; // на всякий случай удалим дубли
             health.OnDeath += OnEnemyDeath;
         }

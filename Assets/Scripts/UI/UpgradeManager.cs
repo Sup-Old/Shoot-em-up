@@ -41,6 +41,10 @@ public class UpgradeManager : MonoBehaviour
             _upgradeWindow.SetActive(true);
             SpawnUpgradeOptions();
         }
+        else
+        {
+            StartCoroutine(CloseUpgradeWindow());
+        }
     }
 
     private IEnumerator CloseUpgradeWindow()

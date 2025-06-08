@@ -69,4 +69,10 @@ public class EnemyHealth : MonoBehaviour, IHealth
             playerExp.Increase(ExpReward);
         }
     }
+    public void ToFull() 
+    { 
+        Current = _config.MaxHealthPoints;
+        OnDecrease?.Invoke();
+        OnHealthChanged?.Invoke(GetHealthPercent());
+    }
 }

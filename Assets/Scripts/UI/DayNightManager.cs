@@ -17,8 +17,9 @@ public class DayNightManager : MonoBehaviour
     public void ShowWindow()
     {
         _window.SetActive(true);
-        RotateObject();
         setLight();
+        RotateObject();
+        
     }
 
     private void setLight()
